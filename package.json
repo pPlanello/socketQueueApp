@@ -1,0 +1,26 @@
+{
+  "name": "socketqueueapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "nodemon ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pPlanello/socketQueueApp.git"
+  },
+  "author": "pPlanello",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pPlanello/socketQueueApp/issues"
+  },
+  "homepage": "https://github.com/pPlanello/socketQueueApp#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "socket.io": "^3.1.1"
+  }
+}
