@@ -1,12 +1,8 @@
 require('dotenv').config();
+const ServerSocket = require('./server/server');
 
-const Server = require('./models/server');
 
-
-const server = new Server();
-
+const server = new ServerSocket();
 
 
 server.listen();
-
-
