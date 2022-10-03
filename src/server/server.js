@@ -34,10 +34,6 @@ class ServerSocket {
         this.app.use(express.json())
     }
 
-    async connectDb() {
-        await dbConnection();
-    }
-
     routes() {
         this.app.use('/api/examples', require('../routes/examples.routes'));
     }

@@ -1,3 +1,6 @@
+const TicketControl = require('../models/ticketControl');
+
+const ticketControl = new TicketControl();
 
 const socketController = (socket) => {
     
@@ -7,14 +10,17 @@ const socketController = (socket) => {
         console.log('Cliente desconectado', socket.id );
     });
 
-    socket.on('enviar-mensaje', ( payload, callback ) => {
+    socket.on('next-ticket', ( payload, callback ) => {
         
-        const id = 123456789;
-        callback( id );
+        const nextTicket = ticketControl.nextTicket();
 
-        socket.broadcast.emit('enviar-mensaje', payload );
+        callback(nextTicket);
 
-    })
+        // Notify new ticket
+
+    });
+
+    socket.emit('last-ticket', ticketControl.lastTicket);
 
 }
 
