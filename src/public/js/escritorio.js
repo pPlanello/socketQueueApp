@@ -2,11 +2,13 @@ const desktopHeader = document.getElementById('desktopHeader');
 const labelLastTicket = document.getElementById('labelLastTicket');
 const labelLast4Tickets = document.getElementById('labelLast4Tickets');
 const buttonAttendNextTicket = document.getElementById('buttonAttendNextTicket');
+const labelAlertInfo = document.getElementById('labelAlertInfo');
 
 const socket = io();
 
 
 const searchParams = new URLSearchParams( window.location.search );
+labelAlertInfo.style.display = 'none';
 
 if (!searchParams.has('escritorio')) {
     window.location = 'index.html';
@@ -26,14 +28,16 @@ socket.on('disconnect', () => {
     buttonAttendNextTicket.disabled = true;
 });
 
-socket.on('last-ticket', (lastTicket) =>{
-    labelLastTicket.innerText = 'Ticket ' + lastTicket;
-});
-
 buttonAttendNextTicket.addEventListener('click', () => {
-    socket.emit('attend-ticket', null, (ticket) => {
-        console.log(ticket);
-        labelNewTicket.innerText = ticket;
+    socket.emit('attend-ticket', desktop, (response) => {
+        const {ok, msg, ticket} = response;
+        
+        if (!ok) {
+            labelLastTicket.innerText = 'No tickets';
+            labelAlertInfo.style.display = '';
+        }
+
+        labelLastTicket.innerText = 'Ticket ' + ticket;
     });
 });
 

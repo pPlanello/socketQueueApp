@@ -20,6 +20,31 @@ const socketController = (socket) => {
 
     });
 
+    socket.on('attend-ticket', (desktop, callback) => {
+        if (!desktop) {
+            return callback({
+                ok: false,
+                msg: 'Desktop is mandatory'
+            });
+        }
+
+        const ticket = ticketControl.attendTicket(desktop);
+
+        // Notify the last4tickets
+        
+        if (!ticket) {
+            return callback({
+                ok: false,
+                msg: 'There are no tickets to attend'
+            });
+        }
+
+        return callback({
+            ok: true,
+            ticket: ticket
+        });
+    });
+
     socket.emit('last-ticket', ticketControl.lastTicket);
 
 }
