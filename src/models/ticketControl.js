@@ -62,7 +62,7 @@ class TicketControl {
         ticket.desktop = desktop;
 
         this.last4Tickets.unshift(ticket);
-
+        
         if (this.last4Tickets.length > 4) {
             this.last4Tickets.splice(-1, 1);
         }

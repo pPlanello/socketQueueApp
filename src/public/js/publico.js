@@ -11,6 +11,9 @@ const socket = io();
 
 socket.on('last-4-tickets', (last4Tickets) => {
     
+    const audio = new Audio('./audio/new-ticket.mp3');
+    audio.play();
+
     const [ticket1, ticket2, ticket3, ticket4] = last4Tickets;
 
     if (ticket1) {
