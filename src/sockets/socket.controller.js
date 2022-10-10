@@ -21,6 +21,7 @@ const socketController = (socket) => {
     });
 
     socket.on('attend-ticket', (desktop, callback) => {
+        console.log('Desktop: ', desktop);
         if (!desktop) {
             return callback({
                 ok: false,
@@ -31,7 +32,8 @@ const socketController = (socket) => {
         const ticket = ticketControl.attendTicket(desktop);
 
         // Notify the last4tickets
-        
+        socket.broadcast.emit('last-4-tickets', ticketControl.last4Tickets);
+
         if (!ticket) {
             return callback({
                 ok: false,
@@ -46,6 +48,8 @@ const socketController = (socket) => {
     });
 
     socket.emit('last-ticket', ticketControl.lastTicket);
+
+    socket.emit('last-4-tickets', ticketControl.last4Tickets);
 
 }
 

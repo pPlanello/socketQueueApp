@@ -30,6 +30,7 @@ socket.on('disconnect', () => {
 
 buttonAttendNextTicket.addEventListener('click', () => {
     socket.emit('attend-ticket', desktop, (response) => {
+        console.log(response);
         const {ok, msg, ticket} = response;
         
         if (!ok) {
@@ -37,8 +38,6 @@ buttonAttendNextTicket.addEventListener('click', () => {
             labelAlertInfo.style.display = '';
         }
 
-        labelLastTicket.innerText = 'Ticket ' + ticket;
+        labelLastTicket.innerText = 'Ticket ' + ticket.number;
     });
 });
-
-console.log('Escritorio HTML', desktop);
