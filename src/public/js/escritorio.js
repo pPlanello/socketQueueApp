@@ -1,8 +1,8 @@
 const desktopHeader = document.getElementById('desktopHeader');
 const labelLastTicket = document.getElementById('labelLastTicket');
-const labelLast4Tickets = document.getElementById('labelLast4Tickets');
 const buttonAttendNextTicket = document.getElementById('buttonAttendNextTicket');
 const labelAlertInfo = document.getElementById('labelAlertInfo');
+const labelNumberTickets = document.getElementById('labelNumberTickets');
 
 const socket = io();
 
@@ -28,9 +28,16 @@ socket.on('disconnect', () => {
     buttonAttendNextTicket.disabled = true;
 });
 
+socket.on('all-tickets', (tickets) => {
+    if (tickets.length === 0) {
+        labelNumberTickets.style.display = 'none';
+    } else {
+        labelNumberTickets.innerText = tickets.length;
+    }
+});
+
 buttonAttendNextTicket.addEventListener('click', () => {
     socket.emit('attend-ticket', desktop, (response) => {
-        console.log(response);
         const {ok, msg, ticket} = response;
         
         if (!ok) {

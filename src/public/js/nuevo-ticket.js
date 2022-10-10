@@ -21,7 +21,6 @@ socket.on('last-ticket', (lastTicket) =>{
 
 buttonCreateTicket.addEventListener('click', () => {
     socket.emit('next-ticket', null, (ticket) => {
-        console.log(ticket);
         labelNewTicket.innerText = ticket;
     });
 });

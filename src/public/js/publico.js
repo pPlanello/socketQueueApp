@@ -10,7 +10,7 @@ const labelEscritorio4 = document.getElementById('labelEscritorio4');
 const socket = io();
 
 socket.on('last-4-tickets', (last4Tickets) => {
-    console.log(last4Tickets);
+    
     const [ticket1, ticket2, ticket3, ticket4] = last4Tickets;
 
     if (ticket1) {

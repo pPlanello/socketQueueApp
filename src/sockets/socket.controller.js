@@ -17,11 +17,10 @@ const socketController = (socket) => {
         callback(nextTicket);
 
         // Notify new ticket
-
+        socket.broadcast.emit('all-tickets', ticketControl.tickets);
     });
 
     socket.on('attend-ticket', (desktop, callback) => {
-        console.log('Desktop: ', desktop);
         if (!desktop) {
             return callback({
                 ok: false,
@@ -33,6 +32,8 @@ const socketController = (socket) => {
 
         // Notify the last4tickets
         socket.broadcast.emit('last-4-tickets', ticketControl.last4Tickets);
+        socket.emit('all-tickets', ticketControl.tickets);
+        socket.broadcast.emit('all-tickets', ticketControl.tickets);
 
         if (!ticket) {
             return callback({
@@ -50,6 +51,8 @@ const socketController = (socket) => {
     socket.emit('last-ticket', ticketControl.lastTicket);
 
     socket.emit('last-4-tickets', ticketControl.last4Tickets);
+
+    socket.emit('all-tickets', ticketControl.tickets);
 
 }
 
